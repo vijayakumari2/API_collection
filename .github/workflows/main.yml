@@ -41,8 +41,15 @@ jobs:
       #     target: 'https://www.zaproxy.org/'
       #     rules_file_name: '.zap/rules.tsv'
       #     cmd_options: '-a'
+      - name: List files in mapped directory
+        run: ls -al /home/runner/work/API_collection/API_collection/
 
-      
+      - name: Upload ZAP Scan Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: zap-scan-report
+          path: /home/runner/work/API_collection/API_collection/report_html.html  # Adjust if you want to upload other formats as well
+
       - name: Upload ZAP Scan Report
         uses: actions/upload-artifact@v4
         with:
