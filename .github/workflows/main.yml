@@ -31,7 +31,7 @@ jobs:
         with:
           target: 'http://localhost'
           allow_issue_writing: false
-          report: '/github/workspace/zap_report.html'
+          report: '/.github/workspace/zap_report.html'
 
       # - name: ZAP Scan with github
       #   uses: zaproxy/action-full-scan@v0.10.0
@@ -47,8 +47,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: zap-scan-report
-          path: /github/workspace/zap_report.html
+          path: /.github/workspace/zap_report.html
       - name: List files in workspace
-        run: ls -al /github/workspace
+        run: ls -al /.github/workspace
     
        
