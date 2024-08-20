@@ -29,7 +29,7 @@ jobs:
         uses: zaproxy/action-full-scan@v0.10.0
         id: zap-scan
         with:
-          target: 'http://localhost'
+          target: 'https://reqres.in/api'
           allow_issue_writing: false
           report: '.github/workspace/zap_report.html'
    
