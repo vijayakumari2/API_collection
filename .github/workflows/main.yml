@@ -7,6 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Install and Start Nginx
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y nginx
+          sudo systemctl start nginx
       
       - name: Install Postman CLI
         run: |
@@ -18,25 +24,19 @@ jobs:
       - name: Run API tests
         run: |
           postman collection run "37011318-6f85eb6d-fd24-400c-8bd9-22ebb2e662ef" -e "37011318-317a8ea7-1207-44c2-9496-bb3d70f3c302"
-      
-      - name: Install and Start Nginx
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y nginx
-          sudo systemctl start nginx
-      
+        
       - name: ZAP Scan
         uses: zaproxy/action-full-scan@v0.10.0
         id: zap-scan
         with:
-          target: 'https://reqres.in/api'
+          target: 'http://localhost'
           allow_issue_writing: false
-          report: '.github/workspace/zap_report.html'
+          report: 'zap_report.html'
    
       - name: Upload ZAP Scan Report
         uses: actions/upload-artifact@v4
         with:
           name: zap-scan-report
-          path: .github/workspace/zap_report.html
+          path: zap_report.html
      
        
